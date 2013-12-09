@@ -1,0 +1,68 @@
+/* Base Styles */
+
+/* Application Styles */
+
+html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+}
+
+body {
+    background: #ffffff url('https://d1a3f4spazzrp4.cloudfront.net/web-fresh/pattern-grid@2x.jpg') repeat left top;
+    background-size: 18px 18px;
+}
+
+#container {
+    font-family: sans-serif;  
+    width: 100%;
+}
+
+#header {    
+    position: fixed;    
+    left: 0;    
+    right: 0;                
+    top: -1px;
+	padding-top: 1px;    
+    height: 50px;
+    width: 100%;         
+    z-index: 100;
+}
+
+.logo {
+    padding: 15px 0;
+}
+
+.logo img {
+    height: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main {        
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+/* Standard Styles */
+
+.floatRight {
+    float: right;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}

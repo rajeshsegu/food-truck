@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Uber FoodTruck</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0"> 
+        
+        <link rel="icon" type="image/png" href="img/branding/uber-app-icon.jpg">
+        <link rel="apple-touch-icon" href="img/branding/uber-app-icon.jpg"/>
+        
+        <!-- BootStrap Styles-->
+        <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />        
+        
+        <!-- FoodTruck Styles -->
+        <link rel="stylesheet" href="css/foodtruck.css">
+        
+    </head>
+    <body>        
+        <div id="container" class="container">
+            <div id="header">               
+               <div class="logo"> <img src="img/branding/uber-logo-transparent.png"/> </div>               
+            </div>
+            <div id="main" role="main" class="row">                
+                <div id="map-canvas" class="col-md-8"></div>  <!--  Google Maps Container -->
+                <div class="col-md-4">RAJESH SEGU</div>  <!--  Google Maps Container -->
+            </div>            
+        </div> <!--! end of #container -->        
+
+        <!-- Add your site or application content here -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>        
+        <script src="http://documentcloud.github.io/underscore/underscore-min.js"></script>
+        <script src="http://documentcloud.github.io/backbone/backbone-min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="js/foodtruck.js"></script>
+        <script>  
+            var app  = new App(new GMap("map-canvas"));
+                                
+        </script>
+
+    </body>
+</html>
