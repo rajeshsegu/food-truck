@@ -2,6 +2,7 @@
     "name": "app-boilerplate",
     "description": "My App Boilerplate",
     "version": "0.0.1",
+    "main": "webserver.js",
     "private": true,
     "dependencies": {        
         
