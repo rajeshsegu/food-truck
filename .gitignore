@@ -3,3 +3,9 @@ node_modules
 files
 tmp
 .idea
+
+atlassian-ide-plugin.xml
+
+*.iml
+
+*.zip
