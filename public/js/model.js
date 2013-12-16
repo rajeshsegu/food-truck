@@ -7,11 +7,11 @@ var FoodTruck = Backbone.Model.extend({
     },
 
     matchesApplicant: function(text){
-        return ( this.get("applicant").toLowerCase().indexOf(text) !== -1)
+        return ( this.get("applicant").toLowerCase().indexOf(text.toLowerCase()) !== -1)
     },
 
     matchesFoodItems: function(text){
-        return ( this.get("fooditems").toLowerCase().indexOf(text) !== -1)
+        return ( this.get("fooditems").toLowerCase().indexOf(text.toLowerCase()) !== -1)
     }
 });
 
