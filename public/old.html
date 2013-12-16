@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Uber FoodTruck</title>
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+
+    <link rel="icon" type="image/jpg" href="img/branding/uber-app-icon.jpg">
+    <link rel="apple-touch-icon" href="img/branding/uber-app-icon.jpg"/>
+
+    <!-- BootStrap Styles-->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/stroll.css">
+
+    <!-- FoodTruck Styles -->
+    <link rel="stylesheet" href="css/foodtruck.css">
+
+</head>
+<body>
+<div id="container" class="container">
+    <div id="header">
+        <div class="logo"> <img src="img/branding/uber-logo-transparent.png"/> </div>
+    </div>
+    <div id="main" role="main" class="row">
+        <div id="map-canvas" class="col-md-8"></div>  <!--  Google Maps Container -->
+        <div id="search" class="col-md-4 oContainer">
+            <div class="input-group pbm">
+                <input type="text" id="search-textbox" autocomplete='off' class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" id="search-textbox-btn" type="button">Go!</button>
+                </span>
+            </div><!-- /input-group -->
+            <div class="clearfix">
+                <div class="label label-primary pull-left">Distance: <span id="distance-val">1</span> mi</div>&nbsp;&nbsp;
+                <input id="search-range" type="range" min=1 max=50 value=10 step=1  style="width:70%;" autocomplete='off'/>
+            </div>
+            <div id="search-results" class="oContainer">
+                <!--  Search Results -->
+            </div>
+
+        </div>  <!--  Google Maps Container -->
+    </div>
+</div> <!--! end of #container -->
+
+<!-- Add your site or application content here -->
+<script src="js/lib/jquery.js"></script>
+<script src="js/lib/underscore.js"></script>
+<script src="js/lib/backbone.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
+<script src="js/lib/stroll.js"></script>
+<script src="js/gMaps.js"></script>
+<script src="js/model.js"></script>
+<!--<script src="js/foodtruck.js"></script>-->
+<script src="js/views.js"></script>
+
+<script id="truckTemplate" type="text/template">
+    <div class="clearfix">
+        <strong class="name pull-left" style="width:80%;"><%= applicant %></strong>
+        <div class="pull-right"><%= distance %> mi</div>
+    </div>
+    <div class="items"><%= fooditems %></div>
+</script>
+
+<script>
+
+    $(document.body).ready(function(){
+        (new FoodTruckApplication());
+    });
+
+</script>
+
+</body>
+</html>

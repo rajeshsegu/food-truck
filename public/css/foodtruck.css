@@ -47,7 +47,80 @@ body {
     padding: 10px;
 }
 
+/**
+ * List used
+ */
+ul {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    list-style: none;
+
+    background: #323232;
+
+    -webkit-perspective: 400px;
+    -moz-perspective: 400px;
+    -ms-perspective: 400px;
+    -o-perspective: 400px;
+    perspective: 400px;
+}
+ul li {
+    position: relative;
+    padding: 16px;
+    /*background: #eee;*/
+    background: #fff;
+    color: #252525;
+    z-index: 2;
+
+    -webkit-transform: translateZ(0px);
+    -moz-transform: translateZ(0px);
+    -ms-transform: translateZ(0px);
+    -o-transform: translateZ(0px);
+    transform: translateZ(0px);
+}
+
+ul li .name {
+    font-size: 18px;
+}
+
+ul li .items {
+    font-size: 12px;
+}
+
+ul li:nth-child(odd) {
+    /*background: #fff;*/
+    background: #eee;
+}
+
+
+/*RANGE*/
+
+/*this is only for webkit, not opera*/
+input[type='range'] {
+    -webkit-appearance: none;
+    padding-left:2px; padding-right:2px;
+    -webkit-border-radius: 5px;
+    background-image: -webkit-linear-gradient(top, #000000, #333333, #000000);
+}
+
 /* Standard Styles */
+
+.oAuto {
+    overflow: auto;
+}
+
+.oContainer {
+    overflow: hidden;
+    height: 100%;
+}
+
+.pbm { /* padding bottom medium */
+    padding-bottom: 10px;
+}
 
 .floatRight {
     float: right;
