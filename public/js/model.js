@@ -1,19 +1,25 @@
 
 //MODELS
 
+//MODEL: FOOD TRUCK
 var FoodTruck = Backbone.Model.extend({
+
     defaults: {
+        //Define distance to the existing FoodTruck JSON
         distance: undefined
     },
 
+    //Check if the model matches the text.
     matchesApplicant: function(text){
         return ( this.get("applicant").toLowerCase().indexOf(text.toLowerCase()) !== -1)
     },
 
+    //Check if the model matches the given food items.
     matchesFoodItems: function(text){
         return ( this.get("fooditems").toLowerCase().indexOf(text.toLowerCase()) !== -1)
     },
 
+    //info, post process JSON to fill in missing data.
     info: function(){
         var json = this.toJSON();
 
@@ -24,17 +30,21 @@ var FoodTruck = Backbone.Model.extend({
     }
 });
 
+//MODEL: FOOD TRUCK COLLECTION
 var FoodTruckList = Backbone.Collection.extend({
 
+    //Collection of type FoodTruck
     model : FoodTruck,
 
+    //REST API to populate the collection
     url : "/foodtruck",
 
+    //SORT comparator method, distance is our primary sort
     comparator: function(a, b){
         return ( a.get('distance') > b.get("distance") ? 1 : -1 );
     },
 
-    //Call update() and then sort()
+    //Update's the distance attribute accross the collection models and sort's it again
     update: function(lat, long, distanceFn){
         this.each(function(model){
             model.set("distance", distanceFn({
@@ -47,10 +57,12 @@ var FoodTruckList = Backbone.Collection.extend({
         return this;
     },
 
+    //All the models in the collection
     all: function(){
         return this.models;
     },
 
+    //Return models that matches the given text.
     search: function (text) {
         if(!text){
             return this.all();
@@ -60,12 +72,14 @@ var FoodTruckList = Backbone.Collection.extend({
         });
     },
 
+    //Return models, that are less than the given distance
     filterByDistance: function(distance){
         return this.filter(function(model){
             return (model.get('distance') <= distance);
         });
     },
 
+    //Filter results by both search text and distance.
     filterResults: function(text, distance){
         distance = distance || 3;
         return _.filter(this.search(text), function(model){
@@ -73,20 +87,19 @@ var FoodTruckList = Backbone.Collection.extend({
         });
     }
 
-
-
 });
 
-//Application
+//Application Model
 
 var FoodTruckApplication = function(){
-
+    //Start Initializing
     this.init();
-
 };
 
+//Mixin Events to allow trigger/on methods
 _.extend(FoodTruckApplication.prototype, Backbone.Events, {
 
+    //Create Application View & adjust size
     init: function(){
 
         this.foodTruckView = new FoodTruckView({
@@ -97,6 +110,7 @@ _.extend(FoodTruckApplication.prototype, Backbone.Events, {
         this.adjustSize();
     },
 
+    //Adjust Size as per the screen size.
     adjustSize: function(){
         var ht = $(document.body).height(),
             wt = $(document.body).width();

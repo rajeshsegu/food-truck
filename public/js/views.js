@@ -6,50 +6,54 @@ var FoodTruckView = Backbone.View.extend({
 
     gMap: null,
 
+    //FoodTruckList collection
     collection: null,
 
+     //Initialize to make the Application active
     initialize: function(options){
 
-        // Cache these selectors
+        // Set the container element
         this.setElement(this.el);
 
+        //Referece to global gMap instance
         this.gMap = options.gMap;
 
+        //Register Search key events
         this.handleSearch();
 
+        //Backbone listeners to handle async ops
         this.registerListeners();
 
+        //Initialize truck list view
         this.truckListView = new FoodTruckListView({
             collection: new FoodTruckList(),
             gMap: this.gMap
         });
 
+        //Render the empty list to start with
         this.render();
 
+        //Cache the markers
         this._markerHash = {};
 
     },
 
+    //All records in the collection
     all: function(){
         return this.collection.all();
     },
 
-    search: function(text){
-        return this.collection.search(text);
-    },
-
-    filterDistance: function(distance){
-        return this.collection.filterByDistance(distance);
-    },
-
+    //Filter the collection by both 'text' and distance
     filterResults: function(text, distance){
         return this.collection.filterResults(text, distance);
     },
 
+    //Update the distance across the collection
     updateDistance: function(lat, long){
         this.collection.update(lat, long, this.gMap.distance);
     },
 
+    //Update the listView with the filtered models
     updateList: function(searchText, distance){
 
         var list;
@@ -62,10 +66,7 @@ var FoodTruckView = Backbone.View.extend({
         return this.truckListView.update(list);
     },
 
-    filterList: function(distance){
-        this.truckListView.update(this.filterDistance());
-    },
-
+    //Update Location and recalculate distances for all the markers
     updateLocation: function(){
         if(this.gMap.locMarker){
             var location = this.gMap.getLocation();
@@ -73,6 +74,7 @@ var FoodTruckView = Backbone.View.extend({
         }
     },
 
+    //search handler
     searchAction: function(){
 
         var distanceVal = $('#search-range').val() / 10,
@@ -81,6 +83,7 @@ var FoodTruckView = Backbone.View.extend({
         this.updateList(searchText, distanceVal);
     },
 
+    //Register DOM events to perform search
     handleSearch: function(){
         $('#search-textbox').bind('keyup', this.searchAction.bind(this));
         $('#search-textbox-btn').bind('click', this.searchAction.bind(this));
@@ -90,6 +93,7 @@ var FoodTruckView = Backbone.View.extend({
         }.bind(this));
     },
 
+    //Render container and populate listview
     render: function(){
 
         //Clear and then render()
@@ -99,6 +103,8 @@ var FoodTruckView = Backbone.View.extend({
         return this;
     },
 
+
+    //register listeners
     registerListeners: function(){
 
         this.collection.on('sync', function(collection, resp){
@@ -128,6 +134,7 @@ var FoodTruckView = Backbone.View.extend({
 
     },
 
+    //Add a single record to the Google Map
     addOne: function( foodTruck ) {
         var template = _.template($('#infoTemplate').html());
 
@@ -139,6 +146,7 @@ var FoodTruckView = Backbone.View.extend({
         });
     },
 
+    //Add all records to the Google Map
     addAll: function() {
         this.collection.each(function(truck){
             this.addOne(truck);
@@ -147,6 +155,7 @@ var FoodTruckView = Backbone.View.extend({
 
 });
 
+//FoodTruck Collection list view
 var FoodTruckListView = Backbone.View.extend({
 
     tagName: 'ul',
@@ -158,23 +167,29 @@ var FoodTruckListView = Backbone.View.extend({
     gMap: null,
 
     initialize: function(options){
+        //On collection update, lets render the html
         this.on('update', this.render);
         this.gMap = options.gMap;
 
     },
 
+    //On update, reset and sort the collection
     update: function(models){
         this.collection.reset(models);
         this.collection.sort();
         this.trigger('update');
     },
 
+    //Render UI
     render: function(){
 
+        //Stroll Effect ( unbind first as we are resetting the list on every refresh )
         window.stroll.unbind(this.el);
 
+        //Clear the container
         this.$el.html('');
 
+        //Render the collection
         this.collection.each(function(truck){
             var truckView = new FoodTruckItemView({
                 model: truck,
@@ -183,6 +198,7 @@ var FoodTruckListView = Backbone.View.extend({
             this.$el.append(truckView.render().el); // calling render method manually..
         }, this);
 
+        //Stroll Effect ( on timeout as it could freeze the UI at busy browsers )
         _.delay(function(){
             window.stroll.bind(this.el);
         }.bind(this), 1000);
@@ -192,6 +208,7 @@ var FoodTruckListView = Backbone.View.extend({
 
 });
 
+//FoodTruck item view
 var FoodTruckItemView = Backbone.View.extend({
 
     tagName: 'li',
@@ -200,10 +217,12 @@ var FoodTruckItemView = Backbone.View.extend({
 
     gMap: null,
 
+    //Add all necessary listeners and event handlers
     initialize: function(options){
         this.model.bind('change', this.render);
         this.gMap = options.gMap;
         this.$el.bind('click', function(){
+            //On Click, show the information window in Google Maps
             var marker = this.gMap.getMarker(this.model.get("cnn")),
                 template = _.template($('#infoTemplate').html());
             this.gMap.showInfoWindow(marker, template(this.model.toJSON()));
@@ -211,10 +230,12 @@ var FoodTruckItemView = Backbone.View.extend({
 
     },
 
+    //Item template as in index.html
     template: function(){
         return _.template($('#truckTemplate').html());
     },
 
+    //Render item UI
     render: function(){
         this.$el.html( this.template()(this.model.info()));
         return this;  // returning this from render method..

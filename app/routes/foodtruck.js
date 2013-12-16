@@ -1,6 +1,7 @@
 var http = require('http');
 
 
+//Helper Method, fetch() from a third party url.
 function fetch(url, fn) {
 
     http.get(url, function (response) {
@@ -18,6 +19,7 @@ function fetch(url, fn) {
         });
 }
 
+//Get Food Truck JSON
 function getFoodTruck(req, res, next){
 
     var url = "http://data.sfgov.org/resource/rqzj-sfat.json";
@@ -31,6 +33,7 @@ function getFoodTruck(req, res, next){
 
 module.exports = function (app) {
 
+    //GET REST end-point
     app.get("/foodtruck", getFoodTruck);
 
 };
