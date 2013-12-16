@@ -16,11 +16,16 @@ Frontend - Backbone, jQuery, Underscore, Google Maps & Stroll frameworks
 CODE 
 ======
 
-STATIC Front-End: food-truck/public
+#### STATIC Front-End: 
 
-NODEJS Back-End:  food-truck/app
+food-truck/public
 
-NODEJS WebServer: food-truck/webserver.js
+#### NODEJS Back-End:  
+
+Routes:    food-truck/app/routes
+( Rest End-point GET /foodtruck is at foodtruck.js )
+
+WebServer: food-truck/webserver.js
 
 PRODUCTION
 ======
