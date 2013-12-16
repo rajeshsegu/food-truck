@@ -56,11 +56,23 @@
 <script src="js/views.js"></script>
 
 <script id="truckTemplate" type="text/template">
-    <div class="clearfix">
-        <strong class="name pull-left" style="width:80%;"><%= applicant %></strong>
-        <div class="pull-right"><%= distance %> mi</div>
+    <div id="<%= cnn %>">
+        <div class="clearfix">
+            <strong class="name pull-left" style="width:80%;"><%= applicant %></strong>
+            <div class="pull-right"><%= distance %> mi</div>
+        </div>
+        <div class="loc"><%= address %></div>
+        <div class="hide">
+            <div class="items"><%= fooditems %></div>
+        </div>
     </div>
-    <div class="items"><%= fooditems %></div>
+</script>
+
+<script id="infoTemplate" type="text/template">
+    <div style="font-weight: bold; font-size: 16px;"><%= applicant %></div>
+    <div><%= address %></div>
+    <div><%= locationdescription %></div>
+    <div class="items" style="font-style:italic; font-weight:bold; margin-top: 5px;"><%= fooditems %></div>
 </script>
 
 <script>

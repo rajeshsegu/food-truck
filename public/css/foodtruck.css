@@ -84,7 +84,7 @@ ul li {
 }
 
 ul li .name {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 ul li .items {
@@ -138,4 +138,8 @@ input[type='range'] {
 
 .clearfix:after {
     clear: both;
+}
+
+.hide {
+    display: none;
 }

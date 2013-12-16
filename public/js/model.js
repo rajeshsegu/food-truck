@@ -12,6 +12,15 @@ var FoodTruck = Backbone.Model.extend({
 
     matchesFoodItems: function(text){
         return ( this.get("fooditems").toLowerCase().indexOf(text.toLowerCase()) !== -1)
+    },
+
+    info: function(){
+        var json = this.toJSON();
+
+        json.address = json.address || "No Address";
+
+        return json;
+
     }
 });
 

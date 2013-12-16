@@ -4,7 +4,7 @@ var GMap = function (id, options) {
     this.id = id;
     this.map = null;
     this.locMarker = null;
-    this._results = [];
+    this._markersHash = {};
     this.options = {
         zoom: 15
     };
@@ -18,6 +18,8 @@ var GMap = function (id, options) {
 _.extend(GMap.prototype, Backbone.Events, {
 
     init: function () {
+
+        this.infoWindow = new google.maps.InfoWindow();
 
         google.maps.event.addDomListener(window, 'load', function () {
             this.getMap();
@@ -101,18 +103,10 @@ _.extend(GMap.prototype, Backbone.Events, {
         return marker;
     },
 
-    cacheResult: function(resultMarker){
-        this._results.push(resultMarker);
-    },
+    addResult: function (props) {
 
-    clearResults: function(){
-        _.each(this._results, function(resultMarker){
-            resultMarker.setMap(null);
-        });
-        this.trigger("reset", this);
-    },
+        props || ( props = {} );
 
-    addResult: function (lat, long) {
         var circle = {
             path: google.maps.SymbolPath.CIRCLE,
             fillColor: 'red',
@@ -122,11 +116,29 @@ _.extend(GMap.prototype, Backbone.Events, {
             strokeWeight: 1
         };
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat, long),
+            position: new google.maps.LatLng(props.lat, props.long),
             icon: circle
         });
         marker.setMap(this.map);
+
+        google.maps.event.addListener(marker, 'click', function(){
+//            this.infoWindow.setContent(props.content);
+//            this.infoWindow.open(this.map, marker);
+            this.showInfoWindow(marker, props.content);
+        }.bind(this));
+
+        this._markersHash[props.id] = marker;
+
         return marker;
+    },
+
+    showInfoWindow: function(marker, content){
+        this.infoWindow.setContent(content);
+        this.infoWindow.open(this.map, marker);
+    },
+
+    getMarker: function(id){
+        return this._markersHash[id];
     },
 
     geoLocate: function (callback) {
