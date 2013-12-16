@@ -47,7 +47,14 @@ In case if you are interesting in running this locally, please
 
 > Access http://localhost:5000/
 
+GitHub
+======
 
+Proud of my recent open-source projects
 
+### AngularJS Template i18n Validator
 
+https://github.com/rajeshsegu/angular-i18n-template
+
+This NodeJS solution makes sure every possible text is i18n-ized in every template so that translations are not missed. This is mission critical for SAAS application that caters to various regions of the world. Meanwhile, it can be easily be integrated into the CI setup.
 
