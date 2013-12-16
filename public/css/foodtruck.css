@@ -75,6 +75,7 @@ ul li {
     background: #fff;
     color: #252525;
     z-index: 2;
+    cursor: pointer;
 
     -webkit-transform: translateZ(0px);
     -moz-transform: translateZ(0px);
