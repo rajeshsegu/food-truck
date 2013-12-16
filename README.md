@@ -3,6 +3,9 @@ food-truck
 
 Food-Truck finder for UBER
 
+Inline-style: 
+![alt text](https://raw.github.com/rajeshsegu/food-truck/master/public/img/Uber%20FoodTruck.png "Uber Food Truck Screenshot")
+
 TECHNOLGIES
 ======
 
@@ -38,4 +41,8 @@ In case if you are interesting in running this locally, please
 > node webserver.js 
 
 > Access http://localhost:5000/
+
+
+
+
 
