@@ -79,8 +79,7 @@ process.on('exit', function() {
 
 
 //Kick-Start the server
-
-app.listen( config.getValue("server.port"),  //PORT
-            config.getValue("server.host"));  //HOSTNAME
-
-console.log(['Server running at http://', config.getValue("server.host"), ':', config.getValue("server.port"), '/'].join(""));
+var port = process.env.PORT || 5000;
+app.listen(port, function(){
+    console.log("Listening on " + port);
+});

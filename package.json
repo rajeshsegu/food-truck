@@ -4,17 +4,20 @@
     "version": "0.0.1",
     "main": "webserver.js",
     "private": true,
-    "dependencies": {        
-        
+    "dependencies": {
+
         "request": "*",
         "requirejs": "*",
-        "async": "*",  
-        
+        "async": "*",
+
         "express": "*",
         "handlebars":"*",
         "hbs": "*",
-        
-        "prettyjson":"*",        
-        "stylus":"*"                         
+
+        "prettyjson":"*",
+        "stylus":"*"
+    },
+    "engines": {
+        "node": "0.10.x"
     }
 }
