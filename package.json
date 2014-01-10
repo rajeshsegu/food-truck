@@ -1,9 +1,16 @@
 {
-    "name": "app-boilerplate",
-    "description": "My App Boilerplate",
-    "version": "0.0.1",
+    "name": "food-truck",
+    "description": "Food Truck App",
+    "version": "1.0.0",
     "main": "webserver.js",
     "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rajeshsegu/food-truck.git"
+    },
+    "engines": {
+        "node": "0.10.x"
+    },
     "dependencies": {
 
         "request": "*",
@@ -17,7 +24,11 @@
         "prettyjson":"*",
         "stylus":"*"
     },
-    "engines": {
-        "node": "0.10.x"
+    "devDependencies": {
+        "grunt": "*",
+        "grunt-contrib-jasmine": "*"
+    },
+    "scripts": {
+        "test": "grunt test"
     }
 }
